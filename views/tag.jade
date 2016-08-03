@@ -1,0 +1,16 @@
+extends layout
+
+block header
+    h1(class='col-md-8', style="text-align:left;width:auto;height:auto")= title
+
+block content
+    p(class='col-md-12', style="clear:both") In this screen, you can evaluate the selection and ranking of entities. Please select at maximum 5 words that best describe the document displayed below.
+    p(class='col-md-12', style="clear:both")#counter You have currently selected 0 words.
+    a(class='col-md-12', href='/topicLabel') For EVALUATING THE TOPIC-LABEL RELATION click this link. 
+    #wrapper(class='col-md-12')
+        #tags(class='col-md-4')
+            ul#taglist
+        #email(class='col-md-8 well')
+        #buttons(class='col-md-12', style="margin-bottom:75px")
+            button#logout(onClick='logout()', class='btn btn-default') Logout
+            button(onClick='next()', class='btn btn-primary') Next

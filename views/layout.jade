@@ -1,0 +1,31 @@
+doctype html
+html
+    head
+        title= title
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        link(rel='stylesheet', href='/stylesheets/layout.css')
+        link(rel='stylesheet', href='/stylesheets/tag.css')
+        link(rel='stylesheet', href='/stylesheets/topicLabel.css')
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css')
+        link(href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/flatly/bootstrap.min.css", rel="stylesheet")
+    body
+        header(class='header col-md-12')
+            block header
+            a(class='col-md-4', href="http://dws.informatik.uni-mannheim.de/en/home/", style="float:right")
+                img(src='/images/logo_um.png',style='height:70px;width:auto;padding-top:20px;margin-bottom:20px', class='col-md-4')
+        block content
+        #pleaseWaitDialog(class='modal fade',data-backdrop='static', data-keyboard='false')
+            div(class='modal-dialog')
+                div(class='modal-content')
+                    div(class='modal-header')
+                        h1 Processing...
+                    div(class='modal-body')
+                        div(class='progress progress-striped active')
+                        div(class='bar', style='width: 100%')
+        script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
+        script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js' )
+        script(src='/javascripts/global.js')
+        footer(class='footer')
+            a(href="http://dws.informatik.uni-mannheim.de/en/home/")
+                img(src='/images/logo_dws.gif', style='width:auto;margin-left:-170px;')
+            //a(href="mailto:anlausch@mail.uni-mannheim.de", style='color:#FFFFFF;float:right; font-family:initial; font-size:2rem;padding-top:30px') CONTACT

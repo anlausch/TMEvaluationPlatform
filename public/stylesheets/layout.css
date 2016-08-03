@@ -1,0 +1,22 @@
+body{
+	padding-right: 50px;
+	padding-left:50px;
+}
+
+.header {
+    height: 80px;
+	margin-left: -20px;
+	margin-right:-20px;
+	text-align: right;
+}
+
+.footer {
+   margin-left: -50px;
+   margin-right:-50px;
+   position:fixed;
+   bottom:0px;
+   height:70px;
+   width:100%;
+   text-align: left;
+   background: #006666;
+}

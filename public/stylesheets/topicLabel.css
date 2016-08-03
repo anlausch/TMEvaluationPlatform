@@ -1,0 +1,13 @@
+.termbox a{ 
+    color: #000000;
+}
+
+.termbox a:hover{ 
+    color: #18bc9c;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.termbox ul {
+    list-style: none;
+}

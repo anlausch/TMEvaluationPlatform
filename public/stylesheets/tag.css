@@ -1,0 +1,30 @@
+#email {
+    height: 450px;
+    white-space: pre-wrap;
+    overflow: scroll;
+}
+
+#tags{
+    height: 450px;
+    text-align: center;
+}
+ 
+.tag{ 
+    font-size:1.2em; 
+    line-height:1em; 
+}
+ 
+#tags a{ 
+    color: #000000;
+}
+
+#tags a:hover{ 
+    color: #18bc9c;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#taglist {
+    list-style: none;
+    padding-top: 50px;
+}
