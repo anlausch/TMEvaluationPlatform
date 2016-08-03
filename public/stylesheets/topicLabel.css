@@ -8,6 +8,16 @@
     text-decoration: none;
 }
 
-.termbox ul {
+ul {
     list-style: none;
+}
+
+.labelOption a:hover{ 
+    color: #18bc9c;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.labelOption a{ 
+    color: #000000;
 }

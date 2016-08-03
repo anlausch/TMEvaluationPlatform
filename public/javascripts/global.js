@@ -16,6 +16,8 @@ $(document).ready(function() {
         populateEmail();
     }else if (window.location.pathname == "/labelTopic"){
         populateLabelTopic();
+    }else if (window.location.pathname == "/topicLabel"){
+        populateTopicLabel();
     }
 });
 
@@ -72,16 +74,8 @@ function populateEmail() {
 
 function populateLabelTopic(){
     $.getJSON( '/dataLabelTopic', function( data ) {
-        emailId = data[0].email_id;
-        entityTitles = getDistinctEntityTitles(data);
-        var result = [];
-        for (entityTitle in entityTitles){
-            var obj = {
-                "entityTitle" : entityTitles[entityTitle],
-                "terms" : getTermsforEntityTitle(data, entityTitles[entityTitle])
-            };
-            result.push(obj);
-        }
+        var result = createTopicLabelDataStructure(data);
+        
         // jetzt den ersten entity title nehmen und zeigen, und alle terms
         originalEntityTitle = Math.floor((Math.random() * 3));
         randomEntityTitle = result[originalEntityTitle].entityTitle;
@@ -108,6 +102,57 @@ function populateLabelTopic(){
 
         });
     });
+}
+
+
+function populateTopicLabel(){
+    $.getJSON( '/dataLabelTopic', function( data ) {
+        var result = createTopicLabelDataStructure(data);
+        
+        // jetzt den ersten entity title nehmen und zeigen, und alle terms
+        originalEntityTitle = Math.floor((Math.random() * 3));
+        randomTerms = result[originalEntityTitle].terms;
+        termsContent = "<ul>";
+        for(i in randomTerms){
+            termsContent += "<li class='term'>" + randomTerms[i] + "</li>";
+        }
+        termsContent += "</ul>";
+        label1Content = '<a id="0"><h4 class="">Option 1: ' + result[0].entityTitle.replace(/_/g, " ") + '</h4></a>';
+        label2Content = '<a id="1"><h4 class="">Option 2: ' + result[1].entityTitle.replace(/_/g, " ") + '</h4></a>';
+        label3Content = '<a id="2"><h4 class="">Option 3: ' + result[2].entityTitle.replace(/_/g, " ") + '</h4></a>';
+        $('#terms').html(termsContent);
+        $('#label1').html(label1Content);
+        $('#label2').html(label2Content);
+        $('#label3').html(label3Content);
+        $('a').click(function(event){
+            console.log(entityTitles[event.currentTarget.id]);
+            if(selectedEntityTitle == event.currentTarget.id){
+                selectedEntityTitle = -1;
+                event.currentTarget.style.color = '#000000'
+            }else{
+                event.currentTarget.style.color = '#18bc9c';
+                if(selectedEntityTitle != -1){
+                    $('#' + selectedEntityTitle).attr("style", "color:#000000");
+                }
+                selectedEntityTitle = event.currentTarget.id;
+            }
+        });
+    });
+}
+
+
+function createTopicLabelDataStructure(data){
+    emailId = data[0].email_id;
+    entityTitles = getDistinctEntityTitles(data);
+    var result = [];
+    for (entityTitle in entityTitles){
+        var obj = {
+            "entityTitle" : entityTitles[entityTitle],
+            "terms" : getTermsforEntityTitle(data, entityTitles[entityTitle])
+        };
+        result.push(obj);
+    }
+    return result;
 }
 
 function createTermsContent(data, option){
@@ -154,10 +199,19 @@ function next(){
 }
 
 
-function nextTopicLabelRelation(){
-    $.post( "/dataLabelTopic", {"emailId": emailId, "entityTitles": JSON.stringify(entityTitles), "selectedEntityTitle": entityTitles[selectedEntityTitle], "originalEntityTitle": entityTitles[originalEntityTitle]}, function(data) {
+function nextLabelTopicRelation(){
+    $.post( "/dataLabelTopic", {"emailId": emailId, "entityTitles": JSON.stringify(entityTitles), "selectedEntityTitle": entityTitles[selectedEntityTitle], "originalEntityTitle": entityTitles[originalEntityTitle], "mode" : "label_mode"}, function(data) {
     });
     populateLabelTopic();
+    selectedEntityTitle = -1;
+    originalEntityTitle = -1;
+    entityTitles = [];
+}
+
+function nextTopicLabelRelation(){
+    $.post( "/dataLabelTopic", {"emailId": emailId, "entityTitles": JSON.stringify(entityTitles), "selectedEntityTitle": entityTitles[selectedEntityTitle], "originalEntityTitle": entityTitles[originalEntityTitle], "mode" : "term_mode"}, function(data) {
+    });
+    populateTopicLabel();
     selectedEntityTitle = -1;
     originalEntityTitle = -1;
     entityTitles = [];

@@ -1,12 +1,15 @@
 extends layout
 
 block header
-    h1(class='col-md-8', style="text-align:left;width:auto;height:auto")= title
+    h1(class='col-md-8', style="text-align:left;width:auto;height:auto")= Topic Label Relation (Term Mode)
 
 block content
     p(class='col-md-12', style="clear:both")  In this screen, you can evaluate the topic-label relation. Please select the label that best describes the topic displayed below.
     a(class='col-md-12', href='/tag') For EVALUATING THE ENTITY SELECTION AND RANKING click this link.
-    #terms(class='col-md-12')
+    #label1(class='col-md-4 labelOption')
+    #label2(class='col-md-4 labelOption')
+    #label3(class='col-md-4 labelOption')
+    #terms(class='col-md-12 well')
     #buttons(class='col-md-12', style="margin-bottom:75px")
         button#logout(onClick='logout()', class='btn btn-default') Logout
         button(onClick='window.location="/labelTopic"', class='btn btn-primary') Go to Label Mode

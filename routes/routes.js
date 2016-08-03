@@ -119,7 +119,7 @@ router.post('/dataLabelTopic', pass.isLoggedIn, function(req, res) {
     var entityTitles = JSON.parse(req.body.entityTitles);
     var selectedEntityTitle = req.body.selectedEntityTitle;
     var originalEntityTitle = req.body.originalEntityTitle;
-    var mode = "label_mode";
+    var mode = req.body.mode;
     var insert = [];
     for(var i = 0; i < entityTitles.length; i++){
         var entityTitle = entityTitles[i];
