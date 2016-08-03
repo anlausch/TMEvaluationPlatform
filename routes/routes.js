@@ -119,6 +119,7 @@ router.post('/dataLabelTopic', pass.isLoggedIn, function(req, res) {
     var entityTitles = JSON.parse(req.body.entityTitles);
     var selectedEntityTitle = req.body.selectedEntityTitle;
     var originalEntityTitle = req.body.originalEntityTitle;
+    var mode = "label_mode";
     var insert = [];
     for(var i = 0; i < entityTitles.length; i++){
         var entityTitle = entityTitles[i];
@@ -126,10 +127,10 @@ router.post('/dataLabelTopic', pass.isLoggedIn, function(req, res) {
         var isSelected;
         (originalEntityTitle == entityTitle ? isOriginal = true : isOriginal = false);
         (selectedEntityTitle == entityTitle ? isSelected = true : isSelected = false);
-        insert.push([userName, emailId, entityTitle, isOriginal, isSelected]);
+        insert.push([userName, emailId, entityTitle, isOriginal, isSelected, mode]);
     }
     console.log(insert);
-    db.query('Insert into topiclabelannotation(user_username, email_id, entity_title, original, selected) values ?;', [insert], function(err, rows, fields) {
+    db.query('Insert into topiclabelannotation(user_username, email_id, entity_title, original, selected, mode) values ?;', [insert], function(err, rows, fields) {
         if (!err){
             console.log("Query performed.");
             res.json(rows)
