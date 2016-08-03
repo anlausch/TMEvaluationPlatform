@@ -66,6 +66,10 @@ router.get('/labelTopic', pass.isLoggedIn, function(req, res, next) {
     res.render('labelTopic', { title: 'Topic Model Evaluation Platform' });
 });
 
+router.get('/topicLabel', pass.isLoggedIn, function(req, res, next) {
+    res.render('topicLabel', { title: 'Topic Model Evaluation Platform' });
+});
+
 router.get('/annotation', pass.isLoggedIn, function(req, res) {
     var db = req.db;
     db.query('SELECT e.id as id FROM email e WHERE EXISTS (SELECT count(*) as count FROM email, snippet as s, tag as t where email.id = s.email_id and s.id = t.snippet_id and email.id = e.id group by email.id having count >= 10) ORDER BY RAND() limit 1;', function(err, rows, fields) {
