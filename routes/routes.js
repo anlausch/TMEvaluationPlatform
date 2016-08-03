@@ -62,8 +62,8 @@ router.get('/tag', pass.isLoggedIn, function(req, res, next) {
   res.render('tag', { title: 'Topic Model Evaluation Platform' });
 });
 
-router.get('/topicLabel', pass.isLoggedIn, function(req, res, next) {
-    res.render('topicLabel', { title: 'Topic Model Evaluation Platform' });
+router.get('/labelTopic', pass.isLoggedIn, function(req, res, next) {
+    res.render('labelTopic', { title: 'Topic Model Evaluation Platform' });
 });
 
 router.get('/annotation', pass.isLoggedIn, function(req, res) {
@@ -87,7 +87,7 @@ router.get('/annotation', pass.isLoggedIn, function(req, res) {
       });
 });
 
-router.get('/dataTopicLabel', pass.isLoggedIn, function(req, res) {
+router.get('/dataLabelTopic', pass.isLoggedIn, function(req, res) {
     var db = req.db;
     db.query('SELECT email.id as id FROM email WHERE EXISTS (SELECT count(*) as count FROM distribution WHERE email.id=email_id group by email_id having count >= 3) ORDER BY RAND() limit 1;', function(err, rows, fields) {
         if (!err){
@@ -108,7 +108,7 @@ router.get('/dataTopicLabel', pass.isLoggedIn, function(req, res) {
       });
 });
 
-router.post('/dataTopicLabel', pass.isLoggedIn, function(req, res) {
+router.post('/dataLabelTopic', pass.isLoggedIn, function(req, res) {
     var db = req.db;
     var emailId = req.body.emailId;
     var userName = req.user.Username;

@@ -14,8 +14,8 @@ $(document).ready(function() {
     // Populate the email table on initial page load
     if(window.location.pathname == "/tag" && $('#taglist').length > 0){
         populateEmail();
-    }else if (window.location.pathname == "/topicLabel"){
-        populateTopicLabel();
+    }else if (window.location.pathname == "/labelTopic"){
+        populateLabelTopic();
     }
 });
 
@@ -70,8 +70,8 @@ function populateEmail() {
 };
 
 
-function populateTopicLabel(){
-    $.getJSON( '/dataTopicLabel', function( data ) {
+function populateLabelTopic(){
+    $.getJSON( '/dataLabelTopic', function( data ) {
         emailId = data[0].email_id;
         entityTitles = getDistinctEntityTitles(data);
         var result = [];
@@ -155,9 +155,9 @@ function next(){
 
 
 function nextTopicLabelRelation(){
-    $.post( "/dataTopicLabel", {"emailId": emailId, "entityTitles": JSON.stringify(entityTitles), "selectedEntityTitle": entityTitles[selectedEntityTitle], "originalEntityTitle": entityTitles[originalEntityTitle]}, function(data) {
+    $.post( "/dataLabelTopic", {"emailId": emailId, "entityTitles": JSON.stringify(entityTitles), "selectedEntityTitle": entityTitles[selectedEntityTitle], "originalEntityTitle": entityTitles[originalEntityTitle]}, function(data) {
     });
-    populateTopicLabel();
+    populateLabelTopic();
     selectedEntityTitle = -1;
     originalEntityTitle = -1;
     entityTitles = [];

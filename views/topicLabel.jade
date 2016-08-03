@@ -4,18 +4,9 @@ block header
     h1(class='col-md-8', style="text-align:left;width:auto;height:auto")= title
 
 block content
-    p(class='col-md-12', style="clear:both")  In this screen, you can evaluate the topic-label relation. Please select the list of terms that best fit to the label displayed below.
+    p(class='col-md-12', style="clear:both")  In this screen, you can evaluate the topic-label relation. Please select the label that best describes the topic displayed below.
     a(class='col-md-12', href='/tag') For EVALUATING THE ENTITY SELECTION AND RANKING click this link.
-    #label(class='col-md-12')
-    #termscol1(class='col-md-4 well')
-        h3 Option 1:
-        #terms1(class="termbox")
-    #termscol2(class='col-md-4 well')
-        h3 Option 2:
-        #terms2(class="termbox")
-    #termscol3(class='col-md-4 well')
-        h3 Option 3:
-        #terms3(class="termbox")
+    #terms(class='col-md-12')
     #buttons(class='col-md-12', style="margin-bottom:75px")
         button#logout(onClick='logout()', class='btn btn-default') Logout
         button(onClick='nextTopicLabelRelation()', class='btn btn-primary') Next
