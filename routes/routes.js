@@ -75,7 +75,6 @@ router.get('/statsMAP', function(req, res, next) {// authorization missing
     var db = req.db;
     var statsEngine = statsEngineFactory.createStatsEngine(db);
     statsEngine.calculateMAP(function(result){
-        console.log("This is the result the router has: " + result)
         res.json(result)
     });
 });
