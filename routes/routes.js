@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 var pass = require('./../lib/pass');
 var passwordHelper = require('./../lib/passwordHelper');
+var statsEngineFactory = require('./../lib/StatsEngine');
 
 
 router.get('/', function(req, res, next) {
@@ -68,6 +69,15 @@ router.get('/labelTopic', pass.isLoggedIn, function(req, res, next) {
 
 router.get('/topicLabel', pass.isLoggedIn, function(req, res, next) {
     res.render('topicLabel', { title: 'Topic Model Evaluation Platform' });
+});
+
+router.get('/statsMAP', function(req, res, next) {// authorization missing
+    var db = req.db;
+    var statsEngine = statsEngineFactory.createStatsEngine(db);
+    statsEngine.calculateMAP(function(result){
+        console.log("This is the result the router has: " + result)
+        res.json(result)
+    });
 });
 
 router.get('/annotation', pass.isLoggedIn, function(req, res) {
@@ -149,6 +159,10 @@ router.post('/annotation', pass.isLoggedIn, function(req, res) {
     var selectedTags = JSON.parse(req.body.selectedTags);
     var allTags = JSON.parse(req.body.allTags);
     var insert = [];
+    console.log(emailId);
+    console.log(userName);
+    console.log(selectedTags);
+    console.log(allTags)
     for(var i = 0; i < allTags.length; i++){
         var entityTitle = allTags[i];
         var index = selectedTags.indexOf(entityTitle);
