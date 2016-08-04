@@ -75,7 +75,15 @@ router.get('/statsMAP', function(req, res, next) {// authorization missing
     var db = req.db;
     var statsEngine = statsEngineFactory.createStatsEngine(db);
     statsEngine.calculateMAP(function(result){
-        res.json(result)
+        res.json(result);
+    });
+});
+
+router.get('/statsAccuracy', function(req, res, next) {// authorization missing
+    var db = req.db;
+    var statsEngine = statsEngineFactory.createStatsEngine(db);
+    statsEngine.calculateAccuracy(function(result){
+        res.json(result);
     });
 });
 
