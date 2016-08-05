@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const PassportWrapper = require('./../lib/PassportWrapper').createPassportWrapper();
 const PasswordHelper = require('./../lib/PasswordHelper').createPasswordHelper();
-const statsEngineFactory = require('./../lib/StatsEngine');
+const StatsEngine = require('./../lib/StatsEngine').createStatsEngine();
 
 
 router.get('/', function(req, res, next) {
@@ -83,8 +83,7 @@ router.get('/statsMAP', function(req, res, next) {// authorization missing
         return res.json("Invalid Parameter value.");
     }
     console.log("Mode: " + mode);
-    var statsEngine = statsEngineFactory.createStatsEngine(db);
-    statsEngine.calculateMAP(mode, function(result){
+    StatsEngine.calculateMAP(mode, function(result){
         res.json(result);
     });
 });
@@ -96,8 +95,7 @@ router.get('/statsAccuracy', function(req, res, next) {// authorization missing
         (req.query.mode === "label_mode" || req.query.mode === "term_mode" ? mode = req.query.mode : mode="");
     }
     console.log("Mode: " + mode);
-    var statsEngine = statsEngineFactory.createStatsEngine(db);
-    statsEngine.calculateAccuracy(mode, function(result){
+    StatsEngine.calculateAccuracy(mode, function(result){
         res.json(result);
     });
 });

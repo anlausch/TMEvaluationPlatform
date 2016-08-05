@@ -7,7 +7,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const PassportWrapper = require('./lib/PassportWrapper').createPassportWrapper();
-var db = require('./lib/db');
+const DBWrapper = require('./lib/DBWrapper').createDBWrapper();
 var flash = require('connect-flash');
 var session = require('express-session');
 var routes = require('./routes/routes');
@@ -32,7 +32,7 @@ app.use(flash());
 
 //Make our db accessible to our router
 app.use(function(req,res,next){
-    req.db = db;
+    req.db = DBWrapper.db;
     next();
 });
 
