@@ -73,8 +73,19 @@ router.get('/topicLabel', pass.isLoggedIn, function(req, res, next) {
 
 router.get('/statsMAP', function(req, res, next) {// authorization missing
     var db = req.db;
+    var mode = "";
+    if(req.query.mode){
+        if(req.query.mode === "tfidf" || req.query.mode === "llda"){
+            mode = req.query.mode;
+        }else{
+            return res.json("Invalid Parameter value.");
+        }
+    }else{
+        return res.json("Invalid Parameter value.");
+    }
+    console.log("Mode: " + mode);
     var statsEngine = statsEngineFactory.createStatsEngine(db);
-    statsEngine.calculateMAP(function(result){
+    statsEngine.calculateMAP(mode, function(result){
         res.json(result);
     });
 });
