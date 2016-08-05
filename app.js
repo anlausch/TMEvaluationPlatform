@@ -1,16 +1,16 @@
 'use strict';
 
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const PassportWrapper = require('./lib/PassportWrapper').createPassportWrapper();
 const DBWrapper = require('./lib/DBWrapper').createDBWrapper();
-var flash = require('connect-flash');
-var session = require('express-session');
-var routes = require('./routes/routes');
+const flash = require('connect-flash');
+const session = require('express-session');
+const routes = require('./routes/routes');
 
 var app = express();
 
