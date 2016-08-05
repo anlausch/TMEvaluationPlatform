@@ -6,7 +6,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var pass = require('./lib/pass');
+const PassportWrapper = require('./lib/PassportWrapper').createPassportWrapper();
 var db = require('./lib/db');
 var flash = require('connect-flash');
 var session = require('express-session');
@@ -26,8 +26,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
-app.use(pass.passport.initialize());
-app.use(pass.passport.session());
+app.use(PassportWrapper.passport.initialize());
+app.use(PassportWrapper.passport.session());
 app.use(flash());
 
 //Make our db accessible to our router

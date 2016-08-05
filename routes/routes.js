@@ -1,7 +1,7 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
-const pass = require('./../lib/pass');
+const PassportWrapper = require('./../lib/PassportWrapper').createPassportWrapper();
 const PasswordHelper = require('./../lib/PasswordHelper').createPasswordHelper();
 const statsEngineFactory = require('./../lib/StatsEngine');
 
@@ -48,7 +48,7 @@ router.post('/signup',function(req, res, next) {
 });
 
 
-router.post('/login', pass.passport.authenticate('local', { successRedirect: '/tag',
+router.post('/login', PassportWrapper.passport.authenticate('local', { successRedirect: '/tag',
     failureRedirect: '/',
     failureFlash: true })
 );
@@ -58,15 +58,15 @@ router.get('/logout', function(req, res) {
     res.redirect('/');
 });
 
-router.get('/tag', pass.isLoggedIn, function(req, res, next) {
+router.get('/tag', PassportWrapper.isLoggedIn, function(req, res, next) {
   res.render('tag', { title: 'Topic Model Evaluation Platform' });
 });
 
-router.get('/labelTopic', pass.isLoggedIn, function(req, res, next) {
+router.get('/labelTopic', PassportWrapper.isLoggedIn, function(req, res, next) {
     res.render('labelTopic', { title: 'Topic Model Evaluation Platform' });
 });
 
-router.get('/topicLabel', pass.isLoggedIn, function(req, res, next) {
+router.get('/topicLabel', PassportWrapper.isLoggedIn, function(req, res, next) {
     res.render('topicLabel', { title: 'Topic Model Evaluation Platform' });
 });
 
@@ -102,7 +102,7 @@ router.get('/statsAccuracy', function(req, res, next) {// authorization missing
     });
 });
 
-router.get('/annotation', pass.isLoggedIn, function(req, res) {
+router.get('/annotation', PassportWrapper.isLoggedIn, function(req, res) {
     var db = req.db;
     db.query('SELECT e.id as id FROM email e WHERE EXISTS (SELECT count(*) as count FROM email, snippet as s, tag as t where email.id = s.email_id and s.id = t.snippet_id and email.id = e.id group by email.id having count >= 10) ORDER BY RAND() limit 1;', function(err, rows, fields) {
         if (!err){
@@ -123,7 +123,7 @@ router.get('/annotation', pass.isLoggedIn, function(req, res) {
       });
 });
 
-router.get('/dataLabelTopic', pass.isLoggedIn, function(req, res) {
+router.get('/dataLabelTopic', PassportWrapper.isLoggedIn, function(req, res) {
     var db = req.db;
     db.query('SELECT email.id as id FROM email WHERE EXISTS (SELECT count(*) as count FROM distribution WHERE email.id=email_id group by email_id having count >= 3) ORDER BY RAND() limit 1;', function(err, rows, fields) {
         if (!err){
@@ -144,7 +144,7 @@ router.get('/dataLabelTopic', pass.isLoggedIn, function(req, res) {
       });
 });
 
-router.post('/dataLabelTopic', pass.isLoggedIn, function(req, res) {
+router.post('/dataLabelTopic', PassportWrapper.isLoggedIn, function(req, res) {
     var db = req.db;
     var emailId = req.body.emailId;
     var userName = req.user.Username;
@@ -174,7 +174,7 @@ router.post('/dataLabelTopic', pass.isLoggedIn, function(req, res) {
 
 
 
-router.post('/annotation', pass.isLoggedIn, function(req, res) {
+router.post('/annotation', PassportWrapper.isLoggedIn, function(req, res) {
     var db = req.db;
     var emailId = req.body.emailId;
     var userName = req.user.Username;
