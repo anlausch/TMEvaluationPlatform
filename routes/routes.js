@@ -81,8 +81,13 @@ router.get('/statsMAP', function(req, res, next) {// authorization missing
 
 router.get('/statsAccuracy', function(req, res, next) {// authorization missing
     var db = req.db;
+    var mode = "";
+    if(req.query.mode){
+        (req.query.mode === "label_mode" || req.query.mode === "term_mode" ? mode = req.query.mode : mode="");
+    }
+    console.log("Mode: " + mode);
     var statsEngine = statsEngineFactory.createStatsEngine(db);
-    statsEngine.calculateAccuracy(function(result){
+    statsEngine.calculateAccuracy(mode, function(result){
         res.json(result);
     });
 });
