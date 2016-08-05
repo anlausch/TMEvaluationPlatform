@@ -1,10 +1,9 @@
 'use strict';
-
-var express = require('express');
-var router = express.Router();
-var pass = require('./../lib/pass');
-var passwordHelper = require('./../lib/passwordHelper');
-var statsEngineFactory = require('./../lib/StatsEngine');
+const express = require('express');
+const router = express.Router();
+const pass = require('./../lib/pass');
+const PasswordHelper = require('./../lib/PasswordHelper').createPasswordHelper();
+const statsEngineFactory = require('./../lib/StatsEngine');
 
 
 router.get('/', function(req, res, next) {
@@ -30,7 +29,7 @@ router.post('/signup',function(req, res, next) {
                 req.flash('signupMessageError', 'Passwords are not identical.');
                 res.redirect('/signup');
             }else{
-                passwordHelper.hash(password, function(err, pwdHash, pwdSalt) {
+                PasswordHelper.hashPassword(password, function(err, pwdHash, pwdSalt) {
                     if (!err){ 
                         db.query('Insert into user(username, pwdhash, pwdsalt) values(?, ?, ?);', [username, pwdHash, pwdSalt], function(err, rows, fields) {
                             if (!err){
