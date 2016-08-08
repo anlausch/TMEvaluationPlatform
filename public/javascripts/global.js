@@ -2,7 +2,7 @@ requirejs.config({
     baseUrl: 'javascripts/lib'
 });
 
-requirejs(["entitySelector", "labelTopic", "topicLabel"], function(entitySelector, labelTopic, topicLabel) {
+requirejs(["entitySelector", "labelTopic", "topicLabel", "stats"], function(entitySelector, labelTopic, topicLabel, stats) {
     if(window.location.pathname == "/entitySelection" && $('#taglist').length > 0){
         entitySelector.populateData();
         $('#idNextEntitySelection').click({"entitySelector": entitySelector}, entitySelector.next);
@@ -12,6 +12,8 @@ requirejs(["entitySelector", "labelTopic", "topicLabel"], function(entitySelecto
     }else if (window.location.pathname == "/topicLabel"){
         topicLabel.populateData();
         $('#idNextTopicLabel').click({"topicLabel": topicLabel}, topicLabel.next);
+    }else if (window.location.pathname == "/stats"){
+        stats.populateData();
     }
 });
 
