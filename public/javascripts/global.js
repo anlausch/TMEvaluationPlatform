@@ -1,4 +1,4 @@
-// emaildata
+// globals
 var emailId = "";
 
 var selectedTags = [];
@@ -10,9 +10,8 @@ var entityTitles = [];
 
 // DOM Ready =============================================================
 $(document).ready(function() {
-
-    // Populate the email table on initial page load
-    if(window.location.pathname == "/tag" && $('#taglist').length > 0){
+    // Populate the data
+    if(window.location.pathname == "/entitySelection" && $('#taglist').length > 0){
         populateEmail();
     }else if (window.location.pathname == "/labelTopic"){
         populateLabelTopic();
@@ -32,7 +31,7 @@ function populateEmail() {
 
     // jQuery AJAX call for JSON
     showPleaseWait();
-    $.getJSON( '/annotation', function( data ) {
+    $.getJSON( '/dataEntitySelection', function( data ) {
 
         // For each item in our JSON, add a table row and cells to the content string
         emailId = data[0].email_id;
@@ -191,7 +190,7 @@ function getDistinctEntityTitles(data){
 
 
 function next(){
-    $.post( "/annotation", {"emailId": emailId, "selectedTags": JSON.stringify(selectedTags), "allTags": JSON.stringify(allTags)}, function(data) {
+    $.post( "/dataEntitySelection", {"emailId": emailId, "selectedTags": JSON.stringify(selectedTags), "allTags": JSON.stringify(allTags)}, function(data) {
     });
     populateEmail();
     selectedTags = [];

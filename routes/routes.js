@@ -25,8 +25,8 @@ router.get('/signup', function(req, res, next) {
 /**
  * Entity selection and ranking annotation page
  */
-router.get('/tag', PassportWrapper.isLoggedIn, function(req, res, next) {
-  res.render('tag', { title: 'Topic Model Evaluation Platform' });
+router.get('/entitySelection', PassportWrapper.isLoggedIn, function(req, res, next) {
+  res.render('entitySelection', { title: 'Topic Model Evaluation Platform' });
 });
 
 
@@ -49,7 +49,7 @@ router.get('/topicLabel', PassportWrapper.isLoggedIn, function(req, res, next) {
 /**
  * Login service
  */
-router.post('/login', PassportWrapper.passport.authenticate('local', { successRedirect: '/tag',
+router.post('/login', PassportWrapper.passport.authenticate('local', { successRedirect: '/entitySelection',
     failureRedirect: '/',
     failureFlash: true })
 );
@@ -102,7 +102,7 @@ router.post('/signup',function(req, res, next) {
 /**
  * GET Entity selection and ranking annotation service
  */
-router.get('/annotation', PassportWrapper.isLoggedIn, function(req, res) {
+router.get('/dataEntitySelection', PassportWrapper.isLoggedIn, function(req, res) {
     var db = req.db;
     db.query('SELECT e.id as id FROM email e WHERE EXISTS (SELECT count(*) as count FROM email, snippet as s, tag as t where email.id = s.email_id and s.id = t.snippet_id and email.id = e.id group by email.id having count >= 10) ORDER BY RAND() limit 1;', function(err, rows, fields) {
         if (!err){
@@ -127,7 +127,7 @@ router.get('/annotation', PassportWrapper.isLoggedIn, function(req, res) {
 /**
  * POST Entity selection and ranking annotation service
  */
-router.post('/annotation', PassportWrapper.isLoggedIn, function(req, res) {
+router.post('/dataEntitySelection', PassportWrapper.isLoggedIn, function(req, res) {
     var db = req.db;
     var emailId = req.body.emailId;
     var userName = req.user.Username;
