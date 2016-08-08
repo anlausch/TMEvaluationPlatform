@@ -2,7 +2,7 @@ extends layout
 
 block content
     h1=title
-    p Please sign up to the system by choosing a unique username and a password.
+    h6 Please sign up to the system by choosing a unique username and a password.
     -if(messageError !="")
         div#note(class='alert alert-dismissible alert-warning') #{messageError}
     -else if(messageSuccess !="")
@@ -27,7 +27,7 @@ block content
                         input(type='password', name='password2', placeholder='Repeat Password', id='inputPassword2', class='form-control')
                 div(class='form-group')
                     div(class='col-lg-12')
-                        button(type='submit' class='btn btn-info', style="margin-bottom:75px") 
+                        button(type='submit' class='btn btn-primary', style="margin-bottom:75px") 
                             span
                             i(class='fa fa-user')
                             |  Sign Up

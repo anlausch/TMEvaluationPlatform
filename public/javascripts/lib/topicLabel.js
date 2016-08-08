@@ -38,9 +38,9 @@ define(function () {
                     console.log(self.entityTitles[event.currentTarget.id]);
                     if(self.selectedEntityTitle == event.currentTarget.id){
                         self.selectedEntityTitle = -1;
-                        event.currentTarget.style.color = '#000000'
+                        event.target.style.color = '#000000'
                     }else{
-                        event.currentTarget.style.color = '#18bc9c';
+                        event.target.style.color = '#0d87e9';
                         if(self.selectedEntityTitle != -1){
                             $('#' + self.selectedEntityTitle).attr("style", "color:#000000");
                         }

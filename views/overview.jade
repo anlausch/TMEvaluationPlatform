@@ -1,20 +1,20 @@
 extends layout
 
 block header
-    h1(class='col-md-8', style="text-align:left;width:auto;height:auto")= title
+    h2(class='col-md-8', style="text-align:left;width:auto;height:auto")= title
 
 block content
-    p(class='col-md-12', style="clear:both") Welcome to the Topic Model Evaluation Platform.
-    p(class='col-md-12', style="clear:both") You can either evaluate the Entity Selection and Ranking or the Topic-Label Relation of your model. After you have finished your evaluation you can take a look at the evaluation results for this data set. 
+    h6(class='col-md-12', style="clear:both") Welcome to the Topic Model Evaluation Platform.
+    h6(class='col-md-12', style="clear:both") You can either evaluate the Entity Selection and Ranking or the Topic-Label Relation of your model. After you have finished your evaluation you can take a look at the evaluation results for this data set. 
     #overview(class='col-md-12')
         #buttons(class='col-md-12', style="margin-bottom:75px")
-            button#idEntitySelection(onClick='window.location="/entitySelection"', class='btn btn-info btn-block col-md-6')
+            button#idEntitySelection(onClick='window.location="/entitySelection"', class='btn btn-primary btn-block col-md-6')
                 span(class="glyphicon glyphicon-sort" aria-hidden="true")
                 p Evaluate Entity Selection and Ranking
-            button#idTopicLabel(onClick='window.location="/labelTopic"', class='btn btn-info btn-block col-md-6')
+            button#idTopicLabel(onClick='window.location="/labelTopic"', class='btn btn-primary btn-block col-md-6')
                 span(class="glyphicon glyphicon-tag" aria-hidden="true")
                 p Evaluate Topic-Label Relation
-            button#idStats(onClick='window.location="/stats"', class='btn btn-info btn-block col-md-6') 
+            button#idStats(onClick='window.location="/stats"', class='btn btn-primary btn-block col-md-6') 
                 span(class="glyphicon glyphicon-stats" aria-hidden="true")
                 p Go to Statistics
             button#idLogout(onClick='logout()', class='btn btn-default btn-block col-md-6') 

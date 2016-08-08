@@ -1,19 +1,19 @@
 extends layout
 
 block header
-    h1(class='col-md-8', style="text-align:left;width:auto;height:auto") Topic Label Relation: Label Mode
+    h2(class='col-md-8', style="text-align:left;width:auto;height:auto") Topic Label Relation: Label Mode
 
 block content
-    p(class='col-md-12', style="clear:both")  In this screen, you can evaluate the topic-label relation. Please select the list of terms that best fit to the label displayed below.
+    h6(class='col-md-12', style="clear:both")  In this screen, you can evaluate the topic-label relation. Please select the list of terms that best fit to the label displayed below.
     #label(class='col-md-12')
     #termscol1(class='col-md-4 well')
-        h3 Option 1:
+        h4 Option 1:
         #terms1(class="termbox")
     #termscol2(class='col-md-4 well')
-        h3 Option 2:
+        h4 Option 2:
         #terms2(class="termbox")
     #termscol3(class='col-md-4 well')
-        h3 Option 3:
+        h4 Option 3:
         #terms3(class="termbox")
     #buttons(class='col-md-12 btn-group', style="margin-bottom:75px")
         button(class='btn btn-default', onClick='window.location="/overview"')
@@ -22,6 +22,6 @@ block content
         button(onClick='window.location="/topicLabel"', class='btn btn-default')
             span(class="glyphicon glyphicon-transfer", aria-hidden="true",style="clear:both") 
             text(style="clear:both")  Term Mode
-        button#idNextLabelTopic(class='btn btn-info')
+        button#idNextLabelTopic(class='btn btn-primary')
             span(class="glyphicon glyphicon-ok", aria-hidden="true",style="clear:both") 
             text(style="clear:both")  Next

@@ -41,7 +41,7 @@ define(function () {
                         $('#counter')[0].textContent = "You have currently selected " + self.selectedTags.length + " words.";
                     }else{
                         if(self.selectedTags.length < 5){
-                            event.target.style.color = '#18bc9c';
+                            event.target.style.color = '#0d87e9';
                             self.selectedTags.push(entityTitle);
                             $('#counter')[0].textContent = "You have currently selected " + self.selectedTags.length + " words.";
                         }else{

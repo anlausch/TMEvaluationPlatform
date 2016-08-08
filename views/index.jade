@@ -3,8 +3,8 @@ extends layout
 block content
     #inner
         h1=title
-        p Welcome to our platform for evaluating topic models.
-        p Please log in. If you do not have an account yet please 
+        h6 Welcome to our platform for evaluating topic models.
+        h6 Please log in. If you do not have an account yet please 
             a(href='/signup') sign up.
         -if(message !="")
             div#note(class='alert alert-dismissible alert-warning') #{message}

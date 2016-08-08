@@ -1,11 +1,11 @@
 extends layout
 
 block header
-    h1(class='col-md-8', style="text-align:left;width:auto;height:auto")= title
+    h2(class='col-md-8', style="text-align:left;width:auto;height:auto")= title
 
 block content
-    p(class='col-md-12', style="clear:both") In this screen, you can evaluate the selection and ranking of entities. Please select at maximum 5 words that best describe the document displayed below.
-    p(class='col-md-12', style="clear:both")#counter You have currently selected 0 words. 
+    h6(class='col-md-12', style="clear:both") In this screen, you can evaluate the selection and ranking of entities. Please select at maximum 5 words that best describe the document displayed below.
+    h6(class='col-md-12', style="clear:both")#counter You have currently selected 0 words. 
     #wrapper(class='col-md-12')
         #tags(class='col-md-4')
             ul#taglist
@@ -14,6 +14,6 @@ block content
             button(class='btn btn-default', onClick='window.location="/overview"')
                 span(class="glyphicon glyphicon-home", aria-hidden="true",style="clear:both") 
                 text(style="clear:both")  Home
-            button#idNextEntitySelection(class='btn btn-info')
+            button#idNextEntitySelection(class='btn btn-primary')
                 span(class="glyphicon glyphicon-ok", aria-hidden="true",style="clear:both") 
                 text(style="clear:both")  Next

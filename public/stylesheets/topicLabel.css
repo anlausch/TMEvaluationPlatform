@@ -3,7 +3,7 @@
 }
 
 .termbox a:hover{ 
-    color: #18bc9c;
+    color: #0d87e9;
     cursor: pointer;
     text-decoration: none;
 }
@@ -12,8 +12,8 @@ ul {
     list-style: none;
 }
 
-.labelOption a:hover{ 
-    color: #18bc9c;
+.labelOption h4:hover, .labelOption a:hover{ 
+    color: #0d87e9;
     cursor: pointer;
     text-decoration: none;
 }

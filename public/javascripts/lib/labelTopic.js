@@ -11,7 +11,7 @@ define(function () {
                 
                 self.originalEntityTitle = Math.floor((Math.random() * 3));
                 randomEntityTitle = result[self.originalEntityTitle].entityTitle;
-                labelContent = '<h3 class="">Label: ' + randomEntityTitle.replace(/_/g, " ") + '</h3>';
+                labelContent = '<h4 class="">Label: ' + randomEntityTitle.replace(/_/g, " ") + '</h4>';
                 terms1Content = self.createTermsContent(result, 0);
                 terms2Content = self.createTermsContent(result, 1);
                 terms3Content = self.createTermsContent(result, 2);
@@ -25,7 +25,7 @@ define(function () {
                         self.selectedEntityTitle = -1;
                         event.currentTarget.style.color = '#000000'
                     }else{
-                        event.currentTarget.style.color = '#18bc9c';
+                        event.currentTarget.style.color = '#0d87e9';
                         if(self.selectedEntityTitle != -1){
                             $('#' + self.selectedEntityTitle).attr("style", "color:#000000");
                         }
