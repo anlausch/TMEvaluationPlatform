@@ -1,5 +1,5 @@
 requirejs.config({
-    baseUrl: 'javascripts'
+    baseUrl: 'javascripts/lib'
 });
 
 requirejs(["entitySelector", "labelTopic", "topicLabel"], function(entitySelector, labelTopic, topicLabel) {
