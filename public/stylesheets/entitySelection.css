@@ -1,11 +1,11 @@
 #email {
-    height: 450px;
+    height: 460px;
     white-space: pre-wrap;
     overflow: scroll;
 }
 
 #tags{
-    height: 450px;
+    height: 460px;
     text-align: center;
 }
  
