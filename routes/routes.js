@@ -47,9 +47,25 @@ router.get('/topicLabel', PassportWrapper.isLoggedIn, function(req, res, next) {
 
 
 /**
+ * Statistics page
+ */
+router.get('/stats', PassportWrapper.isLoggedIn, function(req, res, next) {
+    res.render('stats', { title: 'Topic Model Evaluation Platform' });
+});
+
+
+/**
+ * Overview page
+ */
+router.get('/overview', PassportWrapper.isLoggedIn, function(req, res, next) {
+    res.render('overview', { title: 'Topic Model Evaluation Platform' });
+});
+
+
+/**
  * Login service
  */
-router.post('/login', PassportWrapper.passport.authenticate('local', { successRedirect: '/entitySelection',
+router.post('/login', PassportWrapper.passport.authenticate('local', { successRedirect: '/overview',
     failureRedirect: '/',
     failureFlash: true })
 );

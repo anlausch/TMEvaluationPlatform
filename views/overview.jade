@@ -1,0 +1,12 @@
+extends layout
+
+block header
+    h1(class='col-md-8', style="text-align:left;width:auto;height:auto")= title
+
+block content
+    p(class='col-md-12', style="clear:both") Welcome.
+    #overview(class='col-md-12')
+        #buttons(class='col-md-12', style="margin-bottom:75px")
+            button#idEntitySelection(onClick='window.location="/entitySelection"', class='btn btn-default col-md-4') Evaluate Entity Selection and Ranking
+            button#idTopicLabel(onClick='window.location="/labelTopic"', class='btn btn-default col-md-4') Evaluate Topic-Label Relation
+            button#idStats(onClick='window.location="/stats"', class='btn btn-default col-md-4') Go to Statistics
