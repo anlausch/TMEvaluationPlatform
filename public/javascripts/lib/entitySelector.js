@@ -18,13 +18,13 @@ define(function () {
             $.getJSON( '/dataEntitySelection', function( data ) {
 
                 // For each item in our JSON, add a table row and cells to the content string
-                self.emailId = data[0].email_id;
-                emailContent = '<p>' + data[0].email_original + '</p>';
+                self.emailId = data[0].documentid;
+                emailContent = '<p>' + data[0].documentoriginal + '</p>';
                 data = self.fisherYates(data);
                 $.each(data, function(){
                     console.log(this);
-                    tagContent += '<li><a class="tag">' + this.entity_title.replace(/_/g, " "); + '</a></li>';
-                    self.allTags.push(this.entity_title);
+                    tagContent += '<li><a class="tag">' + this.entitytitle.replace(/_/g, " "); + '</a></li>';
+                    self.allTags.push(this.entitytitle);
                 });
 
                 // Inject the whole content string into our existing HTML

@@ -51,7 +51,7 @@ define(function () {
         },
         
         createDataStructure: function (data, self){
-            self.emailId = data[0].email_id;
+            self.emailId = data[0].documentid;
             self.entityTitles = self.getDistinctEntityTitles(data);
             var result = [];
             for (entityTitle in self.entityTitles){
@@ -69,7 +69,7 @@ define(function () {
             var result = [];
 
             for (var item, i = 0; item = data[i++];) {
-              var entityTitle = item.entity_title;
+              var entityTitle = item.entitytitle;
 
               if (!(entityTitle in lookup)) {
                 lookup[entityTitle] = 1;
@@ -82,7 +82,7 @@ define(function () {
         getTermsForEntityTitle: function(data, entityTitle){
             result = [];
             data.filter(function(obj) {
-                ((obj.entity_title == entityTitle) && result.push(obj.term));
+                ((obj.entitytitle == entityTitle) && result.push(obj.term));
             });
             return result;
         },

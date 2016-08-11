@@ -120,11 +120,11 @@ router.post('/signup',function(req, res, next) {
  */
 router.get('/dataEntitySelection', PassportWrapper.isLoggedIn, function(req, res) {
     var db = req.db;
-    db.query('SELECT e.id as id FROM email e WHERE EXISTS (SELECT count(*) as count FROM email, snippet as s, tag as t where email.id = s.email_id and s.id = t.snippet_id and email.id = e.id group by email.id having count >= 10) ORDER BY RAND() limit 1;', function(err, rows, fields) {
+    db.query('SELECT d.id as id FROM document d WHERE EXISTS (SELECT count(*) as count FROM document, snippet as s, tag as t where document.id = s.documentid and s.id = t.snippetid and document.id = d.id group by document.id having count >= 10) ORDER BY RAND() limit 1;', function(err, rows, fields) {
         if (!err){
           if(rows[0]){
               var emailId = rows[0].id;
-              db.query('(Select distinct entity_title, email_id, email_original, tf_idf from mv_tfidf as a where a.email_id =? order by tf_idf desc limit 10) union distinct (select entity_title, email_id, email_original, tf_idf from mv_tfidf as b where b.email_id !=? order by rand() limit 5);', [emailId, emailId], function(err, rows, fields) {
+              db.query('(Select distinct entitytitle, documentid, documentoriginal, tfidf from mv_tfidf as a where a.documentid =? order by tfidf desc limit 10) union distinct (select entitytitle, documentid, documentoriginal, tfidf from mv_tfidf as b where b.documentid !=? order by rand() limit 5);', [emailId, emailId], function(err, rows, fields) {
                   if (!err)
                     res.json(rows)
                   else
@@ -164,7 +164,7 @@ router.post('/dataEntitySelection', PassportWrapper.isLoggedIn, function(req, re
         insert.push([userName, emailId, entityTitle, rank]);
     }
     console.log(insert);
-    db.query('Insert into annotation(user_username, email_id, entity_title, rank) values ?;', [insert], function(err, rows, fields) {
+    db.query('Insert into entityselectionannotation(userusername, documentid, entitytitle, rank) values ?;', [insert], function(err, rows, fields) {
         if (!err){
             console.log("Query performed.");
             res.json(rows)
@@ -180,11 +180,11 @@ router.post('/dataEntitySelection', PassportWrapper.isLoggedIn, function(req, re
  */
 router.get('/dataLabelTopic', PassportWrapper.isLoggedIn, function(req, res) {
     var db = req.db;
-    db.query('SELECT email.id as id FROM email WHERE EXISTS (SELECT count(*) as count FROM distribution WHERE email.id=email_id group by email_id having count >= 3) ORDER BY RAND() limit 1;', function(err, rows, fields) {
+    db.query('SELECT document.id as id FROM document WHERE EXISTS (SELECT count(*) as count FROM documenttopicdistribution WHERE document.id=documentid group by documentid having count >= 3) ORDER BY RAND() limit 1;', function(err, rows, fields) {
         if (!err){
           if(rows[0]){
               var emailId = rows[0].id;
-              db.query('Select t1.email_id, t1.entity_title, t2.term from (SELECT d.email_id, d.entity_title, d.fraction from distribution d where d.email_id =? group by entity_title order by d.fraction limit 3) as t1, topic as t2 where t1.entity_title = t2.entity_title;', [emailId], function(err, rows, fields) {
+              db.query('Select t1.documentid, t1.entitytitle, t2.term from (SELECT d.documentid, d.entitytitle, d.fraction from documenttopicdistribution d where d.documentid =? group by entitytitle order by d.fraction limit 3) as t1, topic as t2 where t1.entitytitle = t2.entitytitle;', [emailId], function(err, rows, fields) {
                   if (!err)
                     res.json(rows)
                   else
@@ -221,7 +221,7 @@ router.post('/dataLabelTopic', PassportWrapper.isLoggedIn, function(req, res) {
         insert.push([userName, emailId, entityTitle, isOriginal, isSelected, mode]);
     }
     console.log(insert);
-    db.query('Insert into topiclabelannotation(user_username, email_id, entity_title, original, selected, mode) values ?;', [insert], function(err, rows, fields) {
+    db.query('Insert into topiclabelannotation (userusername, documentid, entitytitle, isoriginal, isselected, mode) values ?;', [insert], function(err, rows, fields) {
         if (!err){
             console.log("Query performed.");
             res.json(rows)
