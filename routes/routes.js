@@ -272,5 +272,15 @@ router.get('/statsAccuracy', function(req, res, next) {// authorization missing
 });
 
 
+/**
+ * GET number of documents service
+ */
+router.get('/statsNumberOfDocuments', function(req, res, next) {// authorization missing
+    var db = req.db;
+    StatsEngine.getNumberOfDocuments(function(result){
+        res.json(result);
+    });
+});
+
 
 module.exports = router;
