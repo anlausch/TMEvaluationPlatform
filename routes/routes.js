@@ -337,4 +337,15 @@ router.get('/statsAvgNumberOfEntitiesPicked', function(req, res, next) {// autho
     });
 });
 
+
+/**
+ * GET precision of the user input
+ */
+router.get('/statsUserPrecision', function(req, res, next) {// authorization missing
+    var db = req.db;
+    StatsEngine.getUserPrecision(function(result){
+        res.json(result);
+    });
+});
+
 module.exports = router;
