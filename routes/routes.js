@@ -304,4 +304,15 @@ router.get('/statsNumberOfAnnotations', function(req, res, next) {// authorizati
     });
 });
 
+
+/**
+ * GET number of annotations in which the user did not select any entity
+ */
+router.get('/statsNumberOfAnnotationsNoEntitySelected', function(req, res, next) {// authorization missing
+    var db = req.db;
+    StatsEngine.getNumberOfAnnotationsNoEntitySelected(function(result){
+        res.json(result);
+    });
+});
+
 module.exports = router;
