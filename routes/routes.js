@@ -238,6 +238,8 @@ router.post('/dataLabelTopic', PassportWrapper.isLoggedIn, function(req, res) {
 router.get('/statsMAP', function(req, res, next) {// authorization missing
     var db = req.db;
     var mode = "";
+    var onlyTop5 = false;
+    if(JSON.parse(req.query.onlyTop5) === true) onlyTop5 = true;
     if(req.query.mode){
         if(req.query.mode === "tfidf" || req.query.mode === "llda"){
             mode = req.query.mode;
@@ -248,7 +250,7 @@ router.get('/statsMAP', function(req, res, next) {// authorization missing
         return res.json("Invalid Parameter value.");
     }
     console.log("Mode: " + mode);
-    StatsEngine.calculateMAP(mode, function(result){
+    StatsEngine.calculateMAP(mode, onlyTop5, function(result){
         res.json(result);
     });
 });
