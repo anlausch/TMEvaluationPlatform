@@ -283,4 +283,25 @@ router.get('/statsNumberOfDocuments', function(req, res, next) {// authorization
 });
 
 
+/**
+ * GET number of documents annotated
+ */
+router.get('/statsNumberOfDocumentsAnnotated', function(req, res, next) {// authorization missing
+    var db = req.db;
+    StatsEngine.getNumberOfDocumentsAnnotated(function(result){
+        res.json(result);
+    });
+});
+
+
+/**
+ * GET number of documents annotated
+ */
+router.get('/statsNumberOfAnnotations', function(req, res, next) {// authorization missing
+    var db = req.db;
+    StatsEngine.getNumberOfAnnotations(function(result){
+        res.json(result);
+    });
+});
+
 module.exports = router;
