@@ -315,4 +315,15 @@ router.get('/statsNumberOfAnnotationsNoEntitySelected', function(req, res, next)
     });
 });
 
+
+/**
+ * GET number of annotations in which the user only selected noisy entities
+ */
+router.get('/statsNumberOfAnnotationsOnlyNoisySelected', function(req, res, next) {// authorization missing
+    var db = req.db;
+    StatsEngine.getNumberOfAnnotationsOnlyNoisySelected(function(result){
+        res.json(result);
+    });
+});
+
 module.exports = router;
