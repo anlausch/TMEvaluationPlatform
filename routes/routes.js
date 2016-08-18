@@ -326,4 +326,15 @@ router.get('/statsNumberOfAnnotationsOnlyNoisySelected', function(req, res, next
     });
 });
 
+
+/**
+ * GET avg number of entities picked by the user
+ */
+router.get('/statsAvgNumberOfEntitiesPicked', function(req, res, next) {// authorization missing
+    var db = req.db;
+    StatsEngine.getAvgNumberOfEntitiesPicked(function(result){
+        res.json(result);
+    });
+});
+
 module.exports = router;
