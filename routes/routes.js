@@ -350,12 +350,23 @@ router.get('/statsUserPrecision', function(req, res, next) {// authorization mis
 
 
 /**
- * GET precision of the tfidf ranking at n
+ * GET precision of the Tf-Idf ranking at n
  */
 router.get('/statsTfidfPrecisionAtN', function(req, res, next) {// authorization missing
     var db = req.db;
     var n = (req.query.n == 1 || req.query.n == 2 || req.query.n == 3 || req.query.n == 5 || req.query.n == 10 ? req.query.n : 5);
     StatsEngine.getTfidfPrecisionAtN(n, function(result){
+        res.json(result);
+    });
+});
+
+
+/**
+ * GET precision of the L-LDA ranking (at 5)
+ */
+router.get('/statsLLDAPrecision', function(req, res, next) {// authorization missing
+    var db = req.db;
+    StatsEngine.getLLDAPrecision(function(result){
         res.json(result);
     });
 });
