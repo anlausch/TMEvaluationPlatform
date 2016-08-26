@@ -10,6 +10,8 @@
 
 ul {
     list-style: none;
+    text-align: center;
+    height: 460px;
 }
 
 .labelOption h4:hover, .labelOption a:hover{ 
