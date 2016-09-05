@@ -184,7 +184,7 @@ router.get('/dataLabelTopic', PassportWrapper.isLoggedIn, function(req, res) {
         if (!err){
           if(rows[0]){
               var emailId = rows[0].id;
-              db.query('Select t1.documentid, t1.entitytitle, t2.term from (SELECT d.documentid, d.entitytitle, d.fraction from documenttopicdistribution d where d.documentid =? group by entitytitle order by d.fraction limit 3) as t1, topic as t2 where t1.entitytitle = t2.entitytitle;', [emailId], function(err, rows, fields) {
+              db.query('Select t1.documentid, t1.entitytitle, t2.term from (SELECT d.documentid, d.entitytitle, d.fraction from documenttopicdistribution d where d.documentid =? group by entitytitle order by d.fraction limit 3) as t1, topic as t2 where t1.entitytitle = t2.entitytitle ORDER BY t1.entitytitle, t2.termweight DESC;', [emailId], function(err, rows, fields) {
                   if (!err)
                     res.json(rows)
                   else
