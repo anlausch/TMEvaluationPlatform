@@ -238,8 +238,8 @@ router.post('/dataLabelTopic', PassportWrapper.isLoggedIn, function(req, res) {
 router.get('/statsMAP', function(req, res, next) {// authorization missing
     var db = req.db;
     var mode = "";
-    var onlyTop5 = false;
-    if(JSON.parse(req.query.onlyTop5) === true) onlyTop5 = true;
+    var onlyTop4 = false;
+    if(JSON.parse(req.query.onlyTop4) === true) onlyTop4 = true;
     if(req.query.mode){
         if(req.query.mode === "tfidf" || req.query.mode === "llda"){
             mode = req.query.mode;
@@ -250,7 +250,7 @@ router.get('/statsMAP', function(req, res, next) {// authorization missing
         return res.json("Invalid Parameter value.");
     }
     console.log("Mode: " + mode);
-    StatsEngine.calculateMAP(mode, onlyTop5, function(result){
+    StatsEngine.calculateMAP(mode, onlyTop4, function(result){
         res.json(result);
     });
 });
@@ -395,7 +395,7 @@ router.get('/statsTfidfPrecisionAtN', function(req, res, next) {// authorization
 
 
 /**
- * GET precision of the L-LDA ranking (at 5)
+ * GET precision of the L-LDA ranking (at 4)
  */
 router.get('/statsLLDAPrecision', function(req, res, next) {// authorization missing
     var db = req.db;
