@@ -328,11 +328,22 @@ router.get('/statsNumberOfTopicLabelAnnotations', function(req, res, next) {// a
 
 
 /**
- * GET number of annotations in which the user did not select any entity
+ * GET number of entity selection and ranking annotations in which the user did not select any entity
  */
-router.get('/statsNumberOfAnnotationsNoEntitySelected', function(req, res, next) {// authorization missing
+router.get('/statsNumberOfEntitySelectionAnnotationsNothingSelected', function(req, res, next) {// authorization missing
     var db = req.db;
-    StatsEngine.getNumberOfAnnotationsNoEntitySelected(function(result){
+    StatsEngine.getNumberOfEntitySelectionAnnotationsNothingSelected(function(result){
+        res.json(result);
+    });
+});
+
+
+/**
+ * GET number of topic-label relation annotations in which the user did select nothing
+ */
+router.get('/statsNumberOfTopicLabelAnnotationsNothingSelected', function(req, res, next) {// authorization missing
+    var db = req.db;
+    StatsEngine.getNumberOfTopicLabelAnnotationsNothingSelected(function(result){
         res.json(result);
     });
 });
