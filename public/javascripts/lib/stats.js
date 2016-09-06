@@ -38,7 +38,7 @@ define(function () {
                     $('#idTfidfPrecisionAt2').text("Precision of the Tf-Idf Ranking @2: " + d12[0]["p"]);
                     $('#idTfidfPrecisionAt3').text("Precision of the Tf-Idf Ranking @3: " + d13[0]["p"]);
                     $('#idTfidfPrecisionAt5').text("Precision of the Tf-Idf Ranking @5: " + d14[0]["p"]);
-                    $('#idLLDAPrecision').text("Precision of the L-LDA Ranking (@5): " + d15[0]["p"]);
+                    $('#idLLDAPrecision').text("Precision of the L-LDA Ranking (@4): " + d15[0]["p"]);
                     $('#idNumberOfDocumentsTopicLabelAnnotated').text("Number of annotated Documents: " + d16[0]["count"]);
                     $('#idNumberOfTopicLabelAnnotations').text("Number of Topic-Label Relation Annotations: " + d17[0]["count"]);
                     $('#idNumberOfTopicLabelAnnotationsNothingSelected').text("Number of Annotations in which the User did select nothing: " + d18[0]["count"]);
