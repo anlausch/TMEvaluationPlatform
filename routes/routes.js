@@ -395,6 +395,18 @@ router.get('/statsTfidfPrecisionAtN', function(req, res, next) {// authorization
 
 
 /**
+ * GET recall of the tfidf ranking
+ */
+router.get('/statsTfidfRecall', function(req, res, next) {// authorization missing
+    var db = req.db;
+    StatsEngine.getTfidfRecall(function(result){
+        res.json(result);
+    });
+});
+
+
+
+/**
  * GET precision of the L-LDA ranking (at 4)
  */
 router.get('/statsLLDAPrecision', function(req, res, next) {// authorization missing
