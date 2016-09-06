@@ -306,11 +306,22 @@ router.get('/statsNumberOfDocumentsTopicLabelAnnotated', function(req, res, next
 
 
 /**
- * GET number of documents annotated
+ * GET number of entity selection annotations
  */
-router.get('/statsNumberOfAnnotations', function(req, res, next) {// authorization missing
+router.get('/statsNumberOfEntitySelectionAnnotations', function(req, res, next) {// authorization missing
     var db = req.db;
-    StatsEngine.getNumberOfAnnotations(function(result){
+    StatsEngine.getNumberOfEntitySelectionAnnotations(function(result){
+        res.json(result);
+    });
+});
+
+
+/**
+ * GET number of topic-label relation annotations
+ */
+router.get('/statsNumberOfTopicLabelAnnotations', function(req, res, next) {// authorization missing
+    var db = req.db;
+    StatsEngine.getNumberOfTopicLabelAnnotations(function(result){
         res.json(result);
     });
 });
