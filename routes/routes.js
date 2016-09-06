@@ -284,11 +284,22 @@ router.get('/statsNumberOfDocuments', function(req, res, next) {// authorization
 
 
 /**
- * GET number of documents annotated
+ * GET number of documents annotated regarding the entity selection and ranking
  */
-router.get('/statsNumberOfDocumentsAnnotated', function(req, res, next) {// authorization missing
+router.get('/statsNumberOfDocumentsEntitySelectionAnnotated', function(req, res, next) {// authorization missing
     var db = req.db;
-    StatsEngine.getNumberOfDocumentsAnnotated(function(result){
+    StatsEngine.getNumberOfDocumentsEntitySelectionAnnotated(function(result){
+        res.json(result);
+    });
+});
+
+
+/**
+ * GET number of documents annotated regarding the topic-label relation
+ */
+router.get('/statsNumberOfDocumentsTopicLabelAnnotated', function(req, res, next) {// authorization missing
+    var db = req.db;
+    StatsEngine.getNumberOfDocumentsTopicLabelAnnotated(function(result){
         res.json(result);
     });
 });
