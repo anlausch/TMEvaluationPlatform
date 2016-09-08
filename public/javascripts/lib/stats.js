@@ -38,7 +38,7 @@ define(function () {
                     $('#idNumberOfEntitySelectionAnnotationsNothingSelected').text("Number of Annotations in which the User did not select any Entity: " + d8[0]["count"]);
                     $('#idNumberOfAnnotationsOnlyNoisySelected').text("Number of Annotations in which the User selected only noisy Entities: " + d9[0]["count"]);
                     $('#idAvgNumberOfEntitiesPicked').text("Average Number of Entities picked by the Users: " + d10[0]["average"]);
-                    $('#idUserPrecision').text("Precision of the User Input: " + d11[0]["p"]);
+                    $('#idUserPrecision').text("Recall on User Selection: " + d11[0]["r"]);
                     $('#idTfidfPrecisionAt2').text("Precision of the Tf-Idf Ranking @2: " + d12[0]["p"]);
                     $('#idTfidfPrecisionAt3').text("Precision of the Tf-Idf Ranking @3: " + d13[0]["p"]);
                     $('#idTfidfPrecisionAt5').text("Precision of the Tf-Idf Ranking @5: " + d14[0]["p"]);
