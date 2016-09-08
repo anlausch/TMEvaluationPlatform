@@ -395,11 +395,12 @@ router.get('/statsTfidfPrecisionAtN', function(req, res, next) {// authorization
 
 
 /**
- * GET recall of the tfidf ranking
+ * GET recall at n of the tfidf ranking
  */
-router.get('/statsTfidfRecall', function(req, res, next) {// authorization missing
+router.get('/statsTfidfRecallAtN', function(req, res, next) {// authorization missing
     var db = req.db;
-    StatsEngine.getTfidfRecall(function(result){
+    var n = (req.query.n == 1 || req.query.n == 2 || req.query.n == 3 || req.query.n == 5 || req.query.n == 10 ? req.query.n : 5);
+    StatsEngine.getTfidfRecallAtN(n, function(result){
         res.json(result);
     });
 });
