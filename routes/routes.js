@@ -265,7 +265,6 @@ router.get('/statsAccuracy', function(req, res, next) {// authorization missing
     if(req.query.mode){
         (req.query.mode === "label_mode" || req.query.mode === "term_mode" ? mode = req.query.mode : mode="");
     }
-    console.log("Mode: " + mode);
     StatsEngine.calculateAccuracy(mode, function(result){
         res.json(result);
     });
@@ -299,7 +298,11 @@ router.get('/statsNumberOfDocumentsEntitySelectionAnnotated', function(req, res,
  */
 router.get('/statsNumberOfDocumentsTopicLabelAnnotated', function(req, res, next) {// authorization missing
     var db = req.db;
-    StatsEngine.getNumberOfDocumentsTopicLabelAnnotated(function(result){
+    var mode = "";
+    if(req.query.mode){
+        (req.query.mode === "label_mode" || req.query.mode === "term_mode" ? mode = req.query.mode : mode="");
+    }
+    StatsEngine.getNumberOfDocumentsTopicLabelAnnotated(mode, function(result){
         res.json(result);
     });
 });
@@ -321,7 +324,11 @@ router.get('/statsNumberOfEntitySelectionAnnotations', function(req, res, next) 
  */
 router.get('/statsNumberOfTopicLabelAnnotations', function(req, res, next) {// authorization missing
     var db = req.db;
-    StatsEngine.getNumberOfTopicLabelAnnotations(function(result){
+    var mode = "";
+    if(req.query.mode){
+        (req.query.mode === "label_mode" || req.query.mode === "term_mode" ? mode = req.query.mode : mode="");
+    }
+    StatsEngine.getNumberOfTopicLabelAnnotations(mode, function(result){
         res.json(result);
     });
 });
