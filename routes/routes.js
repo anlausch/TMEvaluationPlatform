@@ -283,7 +283,7 @@ router.get('/statsNumberOfDocuments', function(req, res, next) {// authorization
 
 
 /**
- * GET number of documents annotated regarding the entity selection and ranking
+ * GET number of documents annotated
  */
 router.get('/statsNumberOfDocumentsAnnotated', function(req, res, next) {// authorization missing
     var db = req.db;
@@ -293,10 +293,10 @@ router.get('/statsNumberOfDocumentsAnnotated', function(req, res, next) {// auth
                 res.json(result);
             });
         }else if(req.query.task === "topic_label_relation"){
-          var mode = "";
-          if(req.query.mode){
-              (req.query.mode === "label_mode" || req.query.mode === "term_mode" ? mode = req.query.mode : mode="");
-          }
+            var mode = "";
+            if(req.query.mode){
+                (req.query.mode === "label_mode" || req.query.mode === "term_mode" ? mode = req.query.mode : mode="");
+            }
             StatsEngine.getNumberOfDocumentsTopicLabelAnnotated(mode, function(result){
                 res.json(result);
             });
@@ -309,44 +309,28 @@ router.get('/statsNumberOfDocumentsAnnotated', function(req, res, next) {// auth
 });
 
 
-///**
-// * GET number of documents annotated regarding the topic-label relation
-// */
-//router.get('/statsNumberOfDocumentsTopicLabelAnnotated', function(req, res, next) {// authorization missing
-//    var db = req.db;
-//    var mode = "";
-//    if(req.query.mode){
-//        (req.query.mode === "label_mode" || req.query.mode === "term_mode" ? mode = req.query.mode : mode="");
-//    }
-//    StatsEngine.getNumberOfDocumentsTopicLabelAnnotated(mode, function(result){
-//        res.json(result);
-//    });
-//});
-
-
 /**
- * GET number of entity selection annotations
+ * GET number of annotations
  */
-router.get('/statsNumberOfEntitySelectionAnnotations', function(req, res, next) {// authorization missing
+router.get('/statsNumberOfAnnotations', function(req, res, next) {// authorization missing
     var db = req.db;
-    StatsEngine.getNumberOfEntitySelectionAnnotations(function(result){
-        res.json(result);
-    });
-});
-
-
-/**
- * GET number of topic-label relation annotations
- */
-router.get('/statsNumberOfTopicLabelAnnotations', function(req, res, next) {// authorization missing
-    var db = req.db;
-    var mode = "";
-    if(req.query.mode){
-        (req.query.mode === "label_mode" || req.query.mode === "term_mode" ? mode = req.query.mode : mode="");
+    if(req.query.task){
+        if(req.query.task === "entity_selection"){
+            StatsEngine.getNumberOfEntitySelectionAnnotations(function(result){
+                res.json(result);
+            });
+        }else if(req.query.task === "topic_label_relation"){
+            var mode = "";
+            if(req.query.mode){
+                (req.query.mode === "label_mode" || req.query.mode === "term_mode" ? mode = req.query.mode : mode="");
+            }
+            StatsEngine.getNumberOfTopicLabelAnnotations(mode, function(result){
+                res.json(result);
+            });
+        }else{
+            res.json("Invalid parameter value.");
+        }
     }
-    StatsEngine.getNumberOfTopicLabelAnnotations(mode, function(result){
-        res.json(result);
-    });
 });
 
 
