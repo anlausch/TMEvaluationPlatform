@@ -335,24 +335,27 @@ router.get('/statsNumberOfAnnotations', function(req, res, next) {// authorizati
 
 
 /**
- * GET number of entity selection and ranking annotations in which the user did not select any entity
+ * GET number of annotations in which the user did select nothing
  */
-router.get('/statsNumberOfEntitySelectionAnnotationsNothingSelected', function(req, res, next) {// authorization missing
+router.get('/statsNumberOfAnnotationsNothingSelected', function(req, res, next) {// authorization missing
     var db = req.db;
-    StatsEngine.getNumberOfEntitySelectionAnnotationsNothingSelected(function(result){
-        res.json(result);
-    });
-});
-
-
-/**
- * GET number of topic-label relation annotations in which the user did select nothing
- */
-router.get('/statsNumberOfTopicLabelAnnotationsNothingSelected', function(req, res, next) {// authorization missing
-    var db = req.db;
-    StatsEngine.getNumberOfTopicLabelAnnotationsNothingSelected(function(result){
-        res.json(result);
-    });
+    if(req.query.task){
+        if(req.query.task === "entity_selection"){
+            StatsEngine.getNumberOfEntitySelectionAnnotationsNothingSelected(function(result){
+                res.json(result);
+            });
+        }else if(req.query.task === "topic_label_relation"){
+            var mode = "";
+            if(req.query.mode){
+                (req.query.mode === "label_mode" || req.query.mode === "term_mode" ? mode = req.query.mode : mode="");
+            }
+            StatsEngine.getNumberOfTopicLabelAnnotationsNothingSelected(mode, function(result){
+                res.json(result);
+            });
+        }else{
+            res.json("Invalid parameter value.");
+        }
+    }
 });
 
 
