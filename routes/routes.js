@@ -285,27 +285,43 @@ router.get('/statsNumberOfDocuments', function(req, res, next) {// authorization
 /**
  * GET number of documents annotated regarding the entity selection and ranking
  */
-router.get('/statsNumberOfDocumentsEntitySelectionAnnotated', function(req, res, next) {// authorization missing
+router.get('/statsNumberOfDocumentsAnnotated', function(req, res, next) {// authorization missing
     var db = req.db;
-    StatsEngine.getNumberOfDocumentsEntitySelectionAnnotated(function(result){
-        res.json(result);
-    });
-});
-
-
-/**
- * GET number of documents annotated regarding the topic-label relation
- */
-router.get('/statsNumberOfDocumentsTopicLabelAnnotated', function(req, res, next) {// authorization missing
-    var db = req.db;
-    var mode = "";
-    if(req.query.mode){
-        (req.query.mode === "label_mode" || req.query.mode === "term_mode" ? mode = req.query.mode : mode="");
+    if(req.query.task){
+        if(req.query.task === "entity_selection"){
+            StatsEngine.getNumberOfDocumentsEntitySelectionAnnotated(function(result){
+                res.json(result);
+            });
+        }else if(req.query.task === "topic_label_relation"){
+          var mode = "";
+          if(req.query.mode){
+              (req.query.mode === "label_mode" || req.query.mode === "term_mode" ? mode = req.query.mode : mode="");
+          }
+            StatsEngine.getNumberOfDocumentsTopicLabelAnnotated(mode, function(result){
+                res.json(result);
+            });
+        }else{
+            res.json("Invalid parameter value.");
+        }
     }
-    StatsEngine.getNumberOfDocumentsTopicLabelAnnotated(mode, function(result){
-        res.json(result);
-    });
+
+
 });
+
+
+///**
+// * GET number of documents annotated regarding the topic-label relation
+// */
+//router.get('/statsNumberOfDocumentsTopicLabelAnnotated', function(req, res, next) {// authorization missing
+//    var db = req.db;
+//    var mode = "";
+//    if(req.query.mode){
+//        (req.query.mode === "label_mode" || req.query.mode === "term_mode" ? mode = req.query.mode : mode="");
+//    }
+//    StatsEngine.getNumberOfDocumentsTopicLabelAnnotated(mode, function(result){
+//        res.json(result);
+//    });
+//});
 
 
 /**
