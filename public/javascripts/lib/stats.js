@@ -13,7 +13,7 @@ define(function () {
                     $.getJSON('/statsNumberOfAnnotationsNothingSelected?task=entity_selection'),
                     $.getJSON('/statsNumberOfAnnotationsOnlyNoisySelected'),
                     $.getJSON('/statsAvgNumberOfEntitiesPicked'),
-                    $.getJSON('/statsUserPrecision'),
+                    $.getJSON('/statsRecallOnUserSelection'),
                     $.getJSON('/statsTfidfPrecisionAtN?n=2'),
                     $.getJSON('/statsTfidfPrecisionAtN?n=3'),
                     $.getJSON('/statsTfidfPrecisionAtN?n=5'),

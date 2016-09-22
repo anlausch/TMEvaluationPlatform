@@ -382,9 +382,9 @@ router.get('/statsAvgNumberOfEntitiesPicked', function(req, res, next) {// autho
 
 
 /**
- * GET precision of the user input
+ * GET recall on the user selection
  */
-router.get('/statsUserPrecision', function(req, res, next) {// authorization missing
+router.get('/statsRecallOnUserSelection', function(req, res, next) {// authorization missing
     var db = req.db;
     StatsEngine.getUserPrecision(function(result){
         res.json(result);
