@@ -393,24 +393,24 @@ router.get('/statsRecallOnUserSelection', function(req, res, next) {// authoriza
 
 
 /**
- * GET precision of the Tf-Idf ranking at n
+ * GET precision of the Tf-Idf ranking at k
  */
-router.get('/statsTfidfPrecisionAtN', function(req, res, next) {// authorization missing
+router.get('/statsTfidfPrecisionAtK', function(req, res, next) {// authorization missing
     var db = req.db;
-    var n = (req.query.n == 1 || req.query.n == 2 || req.query.n == 3 || req.query.n == 5 || req.query.n == 10 ? req.query.n : 5);
-    StatsEngine.getTfidfPrecisionAtN(n, function(result){
+    var k = (req.query.k == 1 || req.query.k == 2 || req.query.k == 3 || req.query.k == 5 || req.query.k == 10 ? req.query.k : 5);
+    StatsEngine.getTfidfPrecisionAtN(k, function(result){
         res.json(result);
     });
 });
 
 
 /**
- * GET recall at n of the tfidf ranking
+ * GET recall at k of the tfidf ranking
  */
-router.get('/statsTfidfRecallAtN', function(req, res, next) {// authorization missing
+router.get('/statsTfidfRecallAtK', function(req, res, next) {// authorization missing
     var db = req.db;
-    var n = (req.query.n == 1 || req.query.n == 2 || req.query.n == 3 || req.query.n == 5 || req.query.n == 10 ? req.query.n : 5);
-    StatsEngine.getTfidfRecallAtN(n, function(result){
+    var k = (req.query.k == 1 || req.query.k == 2 || req.query.k == 3 || req.query.k == 5 || req.query.k == 10 ? req.query.k : 5);
+    StatsEngine.getTfidfRecallAtN(k, function(result){
         res.json(result);
     });
 });
