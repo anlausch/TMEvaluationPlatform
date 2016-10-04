@@ -164,7 +164,7 @@ router.post('/dataEntitySelection', PassportWrapper.isLoggedIn, function(req, re
         insert.push([userName, emailId, entityTitle, rank]);
     }
     console.log(insert);
-    db.query('Insert into entityselectionannotation(userusername, documentid, entitytitle, rank) values ?;', [insert], function(err, rows, fields) {
+    db.query('Insert into entityselectionannotation(username, documentid, entitytitle, rank) values ?;', [insert], function(err, rows, fields) {
         if (!err){
             console.log("Query performed.");
             res.json(rows)
@@ -221,7 +221,7 @@ router.post('/dataLabelTopic', PassportWrapper.isLoggedIn, function(req, res) {
         insert.push([userName, emailId, entityTitle, isOriginal, isSelected, mode]);
     }
     console.log(insert);
-    db.query('Insert into topiclabelannotation (userusername, documentid, entitytitle, isoriginal, isselected, mode) values ?;', [insert], function(err, rows, fields) {
+    db.query('Insert into topiclabelannotation (username, documentid, entitytitle, isoriginal, isselected, mode) values ?;', [insert], function(err, rows, fields) {
         if (!err){
             console.log("Query performed.");
             res.json(rows)
