@@ -10,7 +10,7 @@ Installation instructions:
 - install Node.js
 - run the following command in the project folder: 
 	npm install
-- change database information in DBWrapper according to your needs
+- change database information in config.js according to your needs
 - start the application:
   npm start
   
