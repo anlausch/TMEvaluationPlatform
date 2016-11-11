@@ -14,4 +14,7 @@ Installation instructions:
 - start the application:
   npm start
   
+This project was part of the research that was done on Entity-based Topic Modeling by the Data and Web Science Research Group of the University of Mannheim.
+http://dws.informatik.uni-mannheim.de/en/home/
+  
  
